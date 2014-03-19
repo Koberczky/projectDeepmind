@@ -3,11 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GC Tour | Contact Us</title>
+    <title>GC Tour | Apply Online</title>
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/vendor/modernizr.js"></script>
+	<script type="text/javascript" charset="utf-8">
+
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", function(){
+	onDeviceReady();
+	}, false);
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+         var ref = window.open('https://www.gogreenvillecollege.org/freshman/splitter.htm', '_blank', 'location=yes');
+         ref.addEventListener('loadstart', function() { alert('start: ' + event.url); });
+         ref.addEventListener('loadstop', function() { alert('stop: ' + event.url); });
+         ref.addEventListener('exit', function() { alert(event.type); });
+    }
+
+    </script>
   </head>
   <body>
-    <iframe src="https://www.gogreenvillecollege.org/freshman/splitter.htm" height="100%" width="100%" frameborder="0"	seamless></iframe>
+
   </body>
 </html>
