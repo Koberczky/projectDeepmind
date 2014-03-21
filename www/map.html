@@ -15,27 +15,45 @@
 		<div id="json"></div>
 		<div id="map-canvas"></div>
 		<script type="text/javascript">
-		$(document).ready(function(){
-		html = $.ajax({
-		url: "http://www.greenville.edu/JSONContent/?type=json&q=%2BstructureName%3ABuilding+%2B%28conhost%3A48190c8c-42c4-46af-8d1a-0cd5db894797+conhost%3ASYSTEM_HOST%29&limit=0",
-		dataType:"html"
-		});
-		html.always( function(data) {
-		
-		var testing = data;
-		
-		}); 
-});
-		</script>
-		<script type="text/javascript">
-			var path =
-				[[38.8933501072404,-89.41022515296936],
-				[38.893300004672454,-89.41023722290998],
-				[38.89324572685059,-89.41022783517838],
-				[38.89324781445989,-89.40995961427694],
-				[38.89335323864974,-89.40995693206793],
-				[38.8933501072404,-89.41022515296936],
-				[38.8933501072404,-89.41022515296936]];
+			var request = function(){
+				$.ajax({
+				type:"GET",
+				url: 'http://www.greenville.edu/application/api/buildingjsonemitter.html',
+				dataType:'jsonp',
+				success: function(data){
+					//var jsonArray = [];
+					//var jsonString = "";
+					data.contentlets.forEach(function(building){
+						var i = 0;
+						var jsonArray = new Array();
+						//jsonArray[i];
+						jsonArray[i] += building.latlongcsv;
+						console.log(jsonArray[i]);
+						i++;
+					});
+					return
+					//var poly = jsonArray.split("~");
+					//console.log(poly);
+					//return poly;
+					/* 
+					this is how the array needs to be for each building:
+					var path =
+						[[38.8933501072404,-89.41022515296936],
+						[38.893300004672454,-89.41023722290998],
+						[38.89324572685059,-89.41022783517838],
+						[38.89324781445989,-89.40995961427694],
+						[38.89335323864974,-89.40995693206793],
+						[38.8933501072404,-89.41022515296936],
+						[38.8933501072404,-89.41022515296936]];*/
+						
+				},
+				error: function(jqXHR, status, exception){
+					console.log(status + " " + exception);
+					console.log(jqXHR);
+				}
+				});
+			}
+			request();
 			var map;
 			$(document).ready(function(){
 				map = new GMaps({
@@ -53,12 +71,30 @@
 				overviewMapControl: true
 				});
 				map.drawOverlay({
-					lat: 38.893638,
+					lat: 38.892238,
 					lng: -89.408745,
 					content: '<div class="overlay"><font size="6">Greenville College</font><div class="overlay_arrow above"></div></div>'
 				});
+				var path = 
+					[[38.89303174657193,-89.40971150994301],
+					[38.89302965895629,-89.40967932343483],
+					[38.892903358095296,-89.40968334674835],
+					[38.89290127047586,-89.40978795289993],
+					[38.89291379619147,-89.40978795289993],
+					[38.892915883810524,-89.40982013940811],
+					[38.89293467237928,-89.4098187983036],
+					[38.89293467237928,-89.40988183021545],
+					[38.89296494284066,-89.40989524126053],
+					[38.89298999424726,-89.40987780690193],
+					[38.892992081864065,-89.4098174571991],
+					[38.89301608945306,-89.40981611609459],
+					[38.89301817706911,-89.40979599952698],
+					[38.893035921803055,-89.40979197621346],
+					[38.89303800941851,-89.40971150994301],
+					[38.89303174657193,-89.40971150994301]];
 				polygon = map.drawPolygon({
-					paths: path, // pre-defined polygon shape
+					paths: request(),
+					//paths: path,
 					strokeColor: '#BBD8E9',
 					strokeOpacity: 1,
 					strokeWeight: 3,
