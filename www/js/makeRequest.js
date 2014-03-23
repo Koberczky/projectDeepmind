@@ -1,17 +1,18 @@
-function makeRequest(){
+function makeRequest(drawBuildings){
+var retdata;
    $.ajax({
-		type:"GET",
+    type:"GET",
         url: 'http://www.greenville.edu/application/api/buildingjsonemitter.html',
-		dataType:'jsonp',
+   dataType:'jsonp',
         success: function(data){
+			retdata = data;
             console.log(data);
             var jsonString = "";
             data.contentlets.forEach(function(building){
-				jsonString += building.fullTitle;
-				jsonString += building.latlongcsv;
-				jsonString += building.description;
+            jsonString += "<strong>" + building.title + "</strong>";
+            jsonString += building.description;
             });
-            return jsonString;
+		drawBuildings(data);
         },
         error: function(jqXHR, status, exception){
         console.log(status + " " + exception);
