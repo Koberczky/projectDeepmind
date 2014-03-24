@@ -29,8 +29,10 @@
 			var map;
 				map = new GMaps({
 					el: '#map-canvas',
-					lat: 38.893638,
-					lng: -89.408745,
+					lat: 38.8940799,
+					lng: -89.4092642,
+					zoom: 17,
+					MapTypeId: google.maps.MapTypeId.HYBRID,
 					zoomControl : true,
 					zoomControlOpt: {
 						style : 'SMALL',
@@ -41,13 +43,12 @@
 				mapTypeControl: true,
 				overviewMapControl: true
 				});
-				map.drawOverlay({
-					lat: 38.893638,
-					lng: -89.408745,
-					content: '<div class="overlay"><font size="6">Greenville College</font><div class="overlay_arrow above"></div></div>'
-				});
 				function drawBuildings(data){
 				data.contentlets.forEach(function(building){
+				if (building.title == "The Gullies" || building.title == "Scott Field")
+				{
+				}
+				else{
 				var x = building.latlongcsv;
 				var patharray = x.split(';');
 				patharray.splice(-1,1);
@@ -59,13 +60,15 @@
 				polygon = map.drawPolygon({
 					paths: patharray,
 					strokeOpacity: 1,
+					strokeColor: '#4494c3',
 					strokeWeight: 3,
 					fillColor: '#BBD8E9',
 					fillOpacity: 0.6,
 					zIndex: 999
 				});
-				
+				}
 				});
+				
 				}
 			});
 		</script>
