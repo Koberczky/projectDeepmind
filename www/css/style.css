@@ -8,3 +8,22 @@ max-width:55px;
 #logo{
 padding: 1rem 0;
 }
+.iframe{
+background-color:white;
+}
+.ui-btn-top{
+top: 0;
+position: absolute;
+z-index: 9999999;
+margin-left: 45%;
+font-size: 2em;
+font-weight: bolder;
+color: orange;
+text-decoration: None;
+}
+.ui-btn-center{
+font-size: 2em;
+font-weight: bolder;
+color: orange!important;
+text-decoration: None;
+}
