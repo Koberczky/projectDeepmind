@@ -43,6 +43,7 @@
 				mapTypeControl: true,
 				overviewMapControl: true
 				});
+				var GeoMarker = new GeolocationMarker(map);
 				function drawBuildings(data){
 				data.contentlets.forEach(function(building){
 				if (building.title == "The Gullies" || building.title == "Scott Field")
