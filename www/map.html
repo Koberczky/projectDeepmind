@@ -18,7 +18,9 @@
 		<div id="map-canvas"></div>
 		<script type="text/javascript">
 		jQuery(document).ready(function($){
+			getcurrentlatlong();
 			makeRequest(drawBuildings);
+			navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true});
 			var path =
 				[[38.8933501072404,-89.41022515296936],
 				[38.893300004672454,-89.41023722290998],
@@ -28,49 +30,65 @@
 				[38.8933501072404,-89.41022515296936],
 				[38.8933501072404,-89.41022515296936]];
 			var map;
-				map = new GMaps({
-					el: '#map-canvas',
-					lat: 38.8940799,
-					lng: -89.4092642,
-					zoom: 17,
-					MapTypeId: google.maps.MapTypeId.HYBRID,
-					zoomControl : true,
-					zoomControlOpt: {
-						style : 'SMALL',
-						position: 'TOP_LEFT'
-					},
+			map = new GMaps({
+				el: '#map-canvas',
+				lat: 38.8940799,
+				lng: -89.4092642,
+				zoom: 17,
+				MapTypeId: google.maps.MapTypeId.HYBRID,
+				zoomControl : true,
+				zoomControlOpt: {
+					style : 'SMALL',
+					position: 'TOP_LEFT'
+				},
 				panControl : false,
 				streetViewControl : false,
 				mapTypeControl: true,
 				overviewMapControl: true
 				});
-				var GeoMarker = new GeolocationMarker(map);
-				function drawBuildings(data){
-				data.contentlets.forEach(function(building){
-				if (building.title == "The Gullies" || building.title == "Scott Field")
-				{
-				}
-				else{
-				var x = building.latlongcsv;
-				var patharray = x.split(';');
-				patharray.splice(-1,1);
-				i=0;
-				while (patharray.length > i){
-					patharray[i] = patharray[i].split(',');
-					i++;
+				function getcurrentlatlong(){
+					if (navigator.geolocation){              
+						alert("navigator.geolocation is supported");
+						navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy:true });
+					}else{
+						alert("navigator.geolocation not supported");
 					}
-				polygon = map.drawPolygon({
-					paths: patharray,
-					strokeOpacity: 1,
-					strokeColor: '#4494c3',
-					strokeWeight: 3,
-					fillColor: '#BBD8E9',
-					fillOpacity: 0.6,
-					zIndex: 999
-				});
 				}
-				});
-				
+				function onSuccess(position) {
+					var lat=position.coords.latitude;
+					var lng=position.coords.longitude;
+					marker = new google.maps.Marker({
+						position: new google.maps.LatLng(lat, lng),
+						map: map,
+						title:"Current Location!"
+                    })
+				}
+				function onError(error) {
+					alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+				}
+				function drawBuildings(data){
+					data.contentlets.forEach(function(building){
+						if (building.title == "The Gullies" || building.title == "Scott Field"){
+						}else{
+							var x = building.latlongcsv;
+							var patharray = x.split(';');
+							patharray.splice(-1,1);
+							i=0;
+							while (patharray.length > i){
+								patharray[i] = patharray[i].split(',');
+								i++;
+							}
+							polygon = map.drawPolygon({
+								paths: patharray,
+								strokeOpacity: 1,
+								strokeColor: '#4494c3',
+								strokeWeight: 3,
+								fillColor: '#BBD8E9',
+								fillOpacity: 0.6,
+								zIndex: 999
+							});
+						}
+					});
 				}
 			});
 		</script>
