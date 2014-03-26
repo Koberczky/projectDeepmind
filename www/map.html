@@ -18,17 +18,7 @@
 		<div id="map-canvas"></div>
 		<script type="text/javascript">
 		jQuery(document).ready(function($){
-			getcurrentlatlong();
 			makeRequest(drawBuildings);
-			navigator.geolocation.getCurrentPosition(onSuccess, onError, {enableHighAccuracy:true});
-			var path =
-				[[38.8933501072404,-89.41022515296936],
-				[38.893300004672454,-89.41023722290998],
-				[38.89324572685059,-89.41022783517838],
-				[38.89324781445989,-89.40995961427694],
-				[38.89335323864974,-89.40995693206793],
-				[38.8933501072404,-89.41022515296936],
-				[38.8933501072404,-89.41022515296936]];
 			var map;
 			map = new GMaps({
 				el: '#map-canvas',
@@ -46,6 +36,7 @@
 				mapTypeControl: true,
 				overviewMapControl: true
 				});
+				getcurrentlatlong();
 				function getcurrentlatlong(){
 					if (navigator.geolocation){              
 						alert("navigator.geolocation is supported");
@@ -54,15 +45,20 @@
 						alert("navigator.geolocation not supported");
 					}
 				}
+				var marker
 				function onSuccess(position) {
 					var lat=position.coords.latitude;
 					var lng=position.coords.longitude;
-					marker = new google.maps.Marker({
-						position: new google.maps.LatLng(lat, lng),
-						map: map,
-						title:"Current Location!"
+					var latlng=new google.maps.LatLng(lat, lng);
+					alert(latlng);
+					marker = map.addMarker({
+						position: latlng,
+						title:"Current Location!",
+						visible: true
                     })
+					
 				}
+				
 				function onError(error) {
 					alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
 				}
