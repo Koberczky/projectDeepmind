@@ -39,10 +39,8 @@
 				getcurrentlatlong();
 				function getcurrentlatlong(){
 					if (navigator.geolocation){              
-						alert("navigator.geolocation is supported");
 						navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy:true });
 					}else{
-						alert("navigator.geolocation not supported");
 					}
 				}
 				var marker;
