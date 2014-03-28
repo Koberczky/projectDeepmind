@@ -34,7 +34,7 @@
         <div class="row">
           <div class="large-4 small-centered text-left columns">
             <div class="callout panel">
-              <p><img class="main_nav" src="img/Building.png" />Building Info</p>
+              <p><a href="buildingList.html"><img class="main_nav" src="img/Building.png" />Building Info</p>
             </div>
           </div>
         </div>
@@ -63,6 +63,7 @@
 		function checkConnection() {
 			if(navigator.connection.type == Connection.NONE){
 				alert('This app requires a data connection to function. Please enable to utilize this app.');
+				navigator.app.exitApp();
 			}
 		}
     </script>
