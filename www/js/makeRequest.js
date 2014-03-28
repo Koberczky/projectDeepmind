@@ -6,7 +6,6 @@ var retdata;
    dataType:'jsonp',
         success: function(data){
 			retdata = data;
-            console.log(data);
             var jsonString = "";
             data.contentlets.forEach(function(building){
             jsonString += "<strong>" + building.title + "</strong>";
