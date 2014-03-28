@@ -83,6 +83,7 @@
 						}
 					});
 				}
+				var watchID = navigator.geolocation.watchPosition(getcurrentlatlong, onError, { timeout: 30000 });
 			});
 		</script>
 		    <script src="js/foundation.min.js"></script>
