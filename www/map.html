@@ -20,6 +20,7 @@
 		jQuery(document).ready(function($){
 			makeRequest(drawBuildings);
 			var map;
+			var marker;
 			map = new GMaps({
 				el: '#map-canvas',
 				lat: 38.8940799,
@@ -36,23 +37,28 @@
 				mapTypeControl: true,
 				overviewMapControl: true
 				});
-				getcurrentlatlong();
 				function getcurrentlatlong(){
 					if (navigator.geolocation){              
 						navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy:true });
 					}else{
 					}
 				}
-				var marker;
+				var count = 0;
 				function onSuccess(position) {
 					var lat=position.coords.latitude;
 					var lng=position.coords.longitude;
 					var latlng=new google.maps.LatLng(lat, lng);
+					if (count == 0){
 					marker = map.addMarker({
 						position: latlng,
 						title:"Current Location!",
 						visible: true
-                    })
+                    });
+					count = 1;
+					}
+					else{
+					marker.setPosition(latlng);
+					}
 					
 				}
 				
@@ -60,6 +66,7 @@
 					alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
 				}
 				function drawBuildings(data){
+					getcurrentlatlong();
 					data.contentlets.forEach(function(building){
 						if (building.title == "The Gullies" || building.title == "Scott Field"){
 						}else{
