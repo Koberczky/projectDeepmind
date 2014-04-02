@@ -90,7 +90,10 @@
 								strokeWeight: 3,
 								fillColor: '#BBD8E9',
 								fillOpacity: 0.4,
-								zIndex: 999
+								zIndex: 999,
+								click: function(e){
+									alert(building.fullTitle + '\n' + building.description);
+								}
 							});
 						}
 					if(building.title == "Burritt East/West"){
