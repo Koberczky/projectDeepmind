@@ -45,6 +45,7 @@
 				}
 				var count = 0;
 				function onSuccess(position) {
+					var image='img/blu-circle-lv.png';
 					var lat=position.coords.latitude;
 					var lng=position.coords.longitude;
 					var latlng=new google.maps.LatLng(lat, lng);
@@ -52,7 +53,8 @@
 					marker = map.addMarker({
 						position: latlng,
 						title:"Current Location!",
-						visible: true
+						visible: true,
+						icon: image
                     });
 					count = 1;
 					}
@@ -61,7 +63,6 @@
 					}
 					
 				}
-				
 				function onError(error) {
 					alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
 				}
@@ -90,7 +91,7 @@
 						}
 					});
 				}
-				var watchID = navigator.geolocation.watchPosition(getcurrentlatlong, onError, { timeout: 30000 });
+				var watchID = navigator.geolocation.watchPosition(getcurrentlatlong, onError, { timeout: 10000 });
 			});
 		</script>
 		    <script src="js/foundation.min.js"></script>
