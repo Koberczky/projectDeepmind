@@ -68,6 +68,10 @@
 				}
 				function drawBuildings(data){
 					getcurrentlatlong();
+					var originLat;
+					var originLon;
+					var destLat;
+					var destLon;
 					data.contentlets.forEach(function(building){
 						if (building.title == "The Gullies" || building.title == "Scott Field"){
 						}else{
@@ -89,7 +93,16 @@
 								zIndex: 999
 							});
 						}
+					if(building.title == "Burritt East/West"){
+					originLat = building.mapLatitude;
+					originLon = building.mapLongitude;
+					}
+					if(building.title == "Janssen Hall"){
+					destLat = building.mapLatitude;
+					destLon = building.mapLongitude;
+					}
 					});
+					getNavigation(originLat, originLon, destLat, destLon);
 				}
 				var watchID = navigator.geolocation.watchPosition(getcurrentlatlong, onError, { timeout: 10000 });
 			});
