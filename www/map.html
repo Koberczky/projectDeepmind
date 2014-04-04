@@ -12,6 +12,10 @@
 	<script type="text/javascript" src="js/makeRequest.js"></script>
 	<script type="text/javascript" src="js/jQuery.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<script src="js/vex.combined.min.js"></script>
+	<script>vex.defaultOptions.className = 'vex-theme-os';</script>
+	<link rel="stylesheet" href="css/vex.css" />
+	<link rel="stylesheet" href="css/vex-theme-os.css" />
 	</head>
 	<body>
 		<a class="ui-btn-top" data-icon="arrow-l" href="javascript:history.back(1) " data-theme="a">Back</a>
@@ -92,7 +96,7 @@
 								fillOpacity: 0.4,
 								zIndex: 999,
 								click: function(e){
-									alert(building.fullTitle + '\n' + building.description);
+									vex.dialog.alert(building.fullTitle + '\n' + building.description);
 								}
 							});
 						}
