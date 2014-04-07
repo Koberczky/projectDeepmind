@@ -13,6 +13,10 @@
 	<script type="text/javascript" src="js/navigation.js"></script>
 	<script type="text/javascript" src="js/jQuery.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<script src="js/vex.combined.min.js"></script>
+	<script>vex.defaultOptions.className = 'vex-theme-os';</script>
+	<link rel="stylesheet" href="css/vex.css" />
+	<link rel="stylesheet" href="css/vex-theme-os.css" />
 	</head>
 	<body>
 		<a class="ui-btn-top" data-icon="arrow-l" href="javascript:history.back(1) " data-theme="a">Back</a>
@@ -84,12 +88,6 @@
 								patharray[i] = patharray[i].split(',');
 								i++;
 							}
-							var infoWindowLoc = new google.maps.LatLng(building.mapLatitude, building.mapLongitude);
-							var contentString = building.fullTitle + '\n' + building.description;
-							var infowindow = new google.maps.InfoWindow({
-								content: contentString
-							});
-							infowindow.setPosition(infoWindowLoc);
 							polygon = map.drawPolygon({
 								paths: patharray,
 								strokeOpacity: 1,
@@ -97,11 +95,11 @@
 								strokeWeight: 3,
 								fillColor: '#BBD8E9',
 								fillOpacity: 0.4,
-								zIndex: 999
-							});							
-						google.maps.event.addListener(polygon, 'click', function() {
-							infowindow.open(map,polygon);
-						});
+								zIndex: 999,
+								click: function(e){
+									vex.dialog.alert(building.fullTitle + '\n' + building.description);
+								}
+							});
 						}
 					if(building.title == "Burritt East/West"){
 					originLat = building.mapLatitude;
