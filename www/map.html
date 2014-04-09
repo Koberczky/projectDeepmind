@@ -13,10 +13,12 @@
 	<script type="text/javascript" src="js/navigation.js"></script>
 	<script type="text/javascript" src="js/jQuery.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/index.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	</head>
 	<body>
 		<a class="ui-btn-top" data-icon="arrow-l" href="javascript:history.back(1) " data-theme="a">Back</a>
 		<div id="map-canvas"></div>
+		<div id="infowindow"></div>
 		<script type="text/javascript">
 		jQuery(document).ready(function($){
 			makeRequest(drawBuildings);
@@ -67,15 +69,24 @@
 				function onError(error) {
 					alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
 				}
+				var infoArray = new Array();
 				function drawBuildings(data){
 					getcurrentlatlong();
 					var originLat;
 					var originLon;
 					var destLat;
 					var destLon;
+					var infoArray = new Array();
+					var k = 0;
 					data.contentlets.forEach(function(building){
 						if (building.title == "The Gullies" || building.title == "Scott Field"){
 						}else{
+						var content = '<h3>' + building.fullTitle + '</h3>' + '<p>' + building.description + '</p>';
+						infoArray[k] = content;
+						//var infoWindow = new google.maps.InfoWindow(
+						//{
+						//	content: content
+						//});
 							var x = building.latlongcsv;
 							var patharray = x.split(';');
 							patharray.splice(-1,1);
@@ -84,6 +95,7 @@
 								patharray[i] = patharray[i].split(',');
 								i++;
 							}
+							//infoArray[k] = infoWindow;
 							polygon = map.drawPolygon({
 								paths: patharray,
 								strokeOpacity: 1,
@@ -93,22 +105,20 @@
 								fillOpacity: 0.4,
 								zIndex: 999,
 								click: function(e){
-									alert(building.fullTitle + '\n' + building.description);
+								document.getElementById('infowindow').innerHTML=content;
+								document.getElementById('infowindow').style.visibility="visible";
+								/*for  (j =0; j < infoArray.length ; j++){
+								infoArray[j].close();
+								}
+									infoWindow.setPosition( new google.maps.LatLng(building.mapLatitude, building.mapLongitude));
+									infoWindow.open(map);*/
 								}
 							});
+							k++;
 						}
-					if(building.title == "Burritt East/West"){
-					originLat = building.mapLatitude;
-					originLon = building.mapLongitude;
-					}
-					if(building.title == "Janssen Hall"){
-					destLat = building.mapLatitude;
-					destLon = building.mapLongitude;
-					}
-					});
-					getNavigation(map, originLat, originLon, destLat, destLon);
+				});
 				}
-				var watchID = navigator.geolocation.watchPosition(getcurrentlatlong, onError, { timeout: 10000 });
+				var watchID = navigator.geolocation.watchPosition(getcurrentlatlong, onError, { timeout: 30000 });
 			});
 		</script>
 		    <script src="js/foundation.min.js"></script>
