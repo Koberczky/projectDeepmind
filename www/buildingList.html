@@ -13,20 +13,32 @@
 	<p>
 		<a class="ui-btn-top" data-icon="arrow-l" href="javascript:history.back(1) " data-theme="a">Back</a>
 		</p>
-		<div id="buildings"><div id="dropdown" data-dropdown-content class="f-dropdown content"></div></div>
+		<div id="buildings"></div>
 		<script type="text/javascript">
 			jQuery(document).ready(function($){
 				makeRequest(drawBuildings);
+				var contentArray = new Array();
+				var i = 0;
 				function drawBuildings(data){
 					data.contentlets.forEach(function(building){
-						var buildingName = "<a href=" + "#" + "class=" + "button " +  "data-dropdown=" + "dropdown" + ">" + building.fullTitle + "</a>" + "<br/>";
+						contentArray[i] = '<h3>' + building.fullTitle + '</h3>' + '<p>' + building.description + '</p>';
+						var buildingName = "<a href='#'" + "onclick='click("+i+")' class=" + "button " +  "data-dropdown=" + "dropdown " + ">" + building.fullTitle + "</a>" + "<br/>";
 						var div = document.getElementById('buildings');
 						div.innerHTML = div.innerHTML + buildingName;
 						
-						var buildingInfo = building.description;
-						var div2 = document.getElementById('dropdown');
-						div2.innerHTML = div.innerHTML + buildingInfo;
+						//var buildingInfo = building.description;
+						//var div2 = document.getElementById('dropdown');
+						//div2.innerHTML = div.innerHTML + buildingInfo;
+						//
+						//infoArray[k] = content;
+						//document.getElementById('infowindow').innerHTML=content;
+						//document.getElementById('buildings').style.visibility="visible";
+						i++;
 					});
+				}
+				function click(num){
+					document.getElementById('content').innerHTML=contentArray[num];
+					document.getElementById('buildings').style.visibility="visible";
 				}
 			});
 		</script>
