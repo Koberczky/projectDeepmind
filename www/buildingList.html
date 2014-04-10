@@ -14,33 +14,34 @@
 		<a class="ui-btn-top" data-icon="arrow-l" href="javascript:history.back(1) " data-theme="a">Back</a>
 		</p>
 		<div id="buildings"></div>
+		<div id="buildingInfo"></div>
 		<script type="text/javascript">
+			var contentArray = new Array();
+			var i = 0;
+			var buildingName;
+			var div = document.getElementById('buildings');
+			var div2 = document.getElementById('buildingInfo');
 			jQuery(document).ready(function($){
 				makeRequest(drawBuildings);
-				var contentArray = new Array();
-				var i = 0;
 				function drawBuildings(data){
 					data.contentlets.forEach(function(building){
 						contentArray[i] = '<h3>' + building.fullTitle + '</h3>' + '<p>' + building.description + '</p>';
-						var buildingName = "<a href='#'" + "onclick='click("+i+")' class=" + "button " +  "data-dropdown=" + "dropdown " + ">" + building.fullTitle + "</a>" + "<br/>";
-						var div = document.getElementById('buildings');
+						buildingName = "<button onclick='clickfn(" + i + ");'" + ">" + building.fullTitle + "</button>" + "<br/>";
 						div.innerHTML = div.innerHTML + buildingName;
-						
-						//var buildingInfo = building.description;
-						//var div2 = document.getElementById('dropdown');
-						//div2.innerHTML = div.innerHTML + buildingInfo;
-						//
-						//infoArray[k] = content;
-						//document.getElementById('infowindow').innerHTML=content;
-						//document.getElementById('buildings').style.visibility="visible";
 						i++;
 					});
 				}
-				function click(num){
-					document.getElementById('content').innerHTML=contentArray[num];
-					document.getElementById('buildings').style.visibility="visible";
-				}
 			});
+			function clickfn(num){
+				var backtolist = "<br/>" + "<button onclick='leave();'" + "> " + "Back to List" + " </button>";
+				div2.innerHTML=contentArray[num] + backtolist;
+				div2.style.visibility="visible";
+				div.style.visibility="hidden";
+			}
+			function leave(){
+				div2.style.visibility="hidden";
+				div.style.visibility="visible";
+			}
 		</script>
 		<script src="js/vendor/jquery.js"></script>
 		<script src="js/foundation.min.js"></script>
