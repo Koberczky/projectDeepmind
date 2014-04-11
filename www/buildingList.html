@@ -13,10 +13,8 @@
 	<p>
 		<a class="ui-btn-top" data-icon="arrow-l" href="javascript:history.back(1) " data-theme="a">Back</a>
 		</p>
-		<div id="container">
 			<div id="buildings"></div>
-			<div id="buildingInfo"></div>
-		</div>
+			<div id="buildingInfo" style="visability: hidden;"></div>
 		<script type="text/javascript">
 			var contentArray = new Array();
 			var i = 0;
@@ -39,6 +37,7 @@
 				div2.innerHTML=contentArray[num] + backtolist;
 				div2.style.visibility="visible";
 				div.style.visibility="hidden";
+				window.scrollTo(0,0);
 			}
 			function leave(){
 				div2.style.visibility="hidden";
