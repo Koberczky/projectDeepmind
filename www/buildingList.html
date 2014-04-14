@@ -10,22 +10,25 @@
 		<script src="js/vendor/modernizr.js"></script>
 	</head>
 	<body>
-	<p>
-		<a class="ui-btn-top" data-icon="arrow-l" href="javascript:history.back(1) " data-theme="a">Back</a>
-		</p>
-			<div id="buildings"></div>
-			<div id="buildingInfo" style="visability: hidden;"></div>
+		<div id="iosback">
+			<a class="ui-btn-top" data-icon="arrow-l" href="javascript:history.back(1) " data-theme="a">Back</a>
+		</div>
+		<div id="buildings" align="center"></div>
+		<div id="buildingInfo" style="visability: hidden;"></div>
 		<script type="text/javascript">
 			var contentArray = new Array();
 			var i = 0;
 			var buildingName;
 			var div = document.getElementById('buildings');
 			var div2 = document.getElementById('buildingInfo');
+			var div3 = document.getElementById('iosback');
+			var loc = null;
 			jQuery(document).ready(function($){
 				makeRequest(drawBuildings);
+				div3.style.visibility="hidden";
 				function drawBuildings(data){
 					data.contentlets.forEach(function(building){
-						contentArray[i] = '<h3>' + building.fullTitle + '</h3>' + '<p>' + building.description + '</p>';
+						contentArray[i] = '<h1>' + '<b>' + '<u>' + '<font color=' + '#e35205' + '>' + building.fullTitle + '</font>' + '</u>' + '</b>' + '</h1>' + '<p>' + building.description + '</p>';
 						buildingName = "<button onclick='clickfn(" + i + ");'" + ">" + building.fullTitle + "</button>" + "<br/>";
 						div.innerHTML = div.innerHTML + buildingName;
 						i++;
@@ -33,6 +36,7 @@
 				}
 			});
 			function clickfn(num){
+				loc = window.screenY;
 				var backtolist = "<br/>" + "<button onclick='leave();'" + "> " + "Back to List" + " </button>";
 				div2.innerHTML=contentArray[num] + backtolist;
 				div2.style.visibility="visible";
@@ -42,7 +46,16 @@
 			function leave(){
 				div2.style.visibility="hidden";
 				div.style.visibility="visible";
+				window.scrollTo(0,loc);
+				loc = null;
 			}
+			/*function ios(){
+				if (device.platform == "iOS" || "iPhone"){
+					div3.style.visibility="visible";
+				}else{
+					div3.style.visibility="hidden";
+				}
+			}*/
 		</script>
 		<script src="js/vendor/jquery.js"></script>
 		<script src="js/foundation.min.js"></script>

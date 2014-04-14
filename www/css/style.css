@@ -27,19 +27,32 @@ font-weight: bolder;
 color: orange!important;
 text-decoration: None;
 }
-#container {
+#buildings {
 width: 100%;
 height: 100%;
 position: relative;
 }
 
-#buildings,
+#buildings{
+width: 100%;
+height: 100%;
+position: absolute;
+top: 0;
+left: 0;
+padding-top: 2%;
+}
 #buildingInfo{
 width: 100%;
 height: 100%;
 position: absolute;
 top: 0;
 left: 0;
+padding-left: 2%;
+padding-right: 2%;
+}
+
+#buildings{
+z-index: 11;
 }
 
 #buildingInfo{
