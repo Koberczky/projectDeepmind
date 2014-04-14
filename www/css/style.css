@@ -5,8 +5,10 @@ background-color: #2a2826;
 padding-right: .75rem;
 max-width:55px;
 }
-#logo{
-padding: 1rem 0;
+.logo{
+background-image: url('img/GClogo.png');
+background-size: contain;
+background-repeat: no-repeat;
 }
 .iframe{
 background-color:white;
@@ -14,7 +16,7 @@ background-color:white;
 .ui-btn-top{
 top: 0;
 position: absolute;
-z-index: 9999999;
+z-index: 99;
 margin-left: 45%;
 font-size: 2em;
 font-weight: bolder;
@@ -27,21 +29,26 @@ font-weight: bolder;
 color: orange!important;
 text-decoration: None;
 }
-#container {
-width: 100%;
-height: 100%;
-position: relative;
+#map-canvas{
+    height:100%;
 }
-
-#buildings,
-#buildingInfo{
-width: 100%;
-height: 100%;
-position: absolute;
-top: 0;
-left: 0;
+#infowindow{
+width:100%;
+height:100%;
+visibility: hidden;
+position:absolute;
+top:45px;
+left:0px;
+background-color:#2a2826;
+z-index: 999;
+text-align: center;
 }
-
-#buildingInfo{
-z-index: 10;
+.main-section{
+    height:100%;
+}
+.inner-wrap{
+ height:100%;
+}
+.off-canvas-wrap{
+    height:100%;
 }
