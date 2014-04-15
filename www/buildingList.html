@@ -2,30 +2,58 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="stylesheet" src="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/app.css" />
 		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/foundation.css" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+		<!-- <link href='http://fonts.googleapis.com/css?family=Convergence|Bitter|Droid+Sans|Ubuntu+Mono' rel='stylesheet' type='text/css' /> -->
 		<script type="text/javascript" src="js/makeRequest.js"></script>
+		<script type="text/javascript" src="js/navigation.js"></script>
 		<script type="text/javascript" src="js/jQuery.js"></script>
-		<script src="js/vendor/modernizr.js"></script>
-	</head>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+    </head>
 	<body>
-		<div id="iosback">
-			<a class="ui-btn-top" data-icon="arrow-l" href="javascript:history.back(1) " data-theme="a">Back</a>
-		</div>
-		<div id="buildings" align="center"></div>
-		<div id="buildingInfo" style="visability: hidden;"></div>
+		<div class="off-canvas-wrap" data-offcanvas>
+			<div class="inner-wrap">
+				<nav class="tab-bar">
+					<section class="left-small">
+						<i class="fi-arrow-left size-36 back-arrow" onclick="goBack()"></i>
+					</section>
+					<section class="middle tab-bar-section">
+						<div class="logo"></div>
+					</section>
+					<section class="right-small">
+						<a class="right-off-canvas-toggle menu-icon" ><span></span></a>
+					</section>
+				</nav>
+
+		<aside class="right-off-canvas-menu">
+			<ul class="off-canvas-list">
+				<li><a href="map.html">Self-Guided Tour</a></li>
+				<li><a href="map.html">Guided Tour</a></li>
+				<li><a href="buildingList.html">Building Info</a></li>
+				<li><a href="ApplyOnline.html">Apply Online</a></li>
+				<li><a href="ContactUs.html">Contact Us</a></li>
+			</ul>
+		</aside>
+		<section class="main-section">
+			<div id="buildings" align="center"></div>
+			<div id="buildingInfo" style="visability: hidden;"></div>
+		</section>
+		<a class="exit-off-canvas"></a>
+			</div>
+	</div>
 		<script type="text/javascript">
 			var contentArray = new Array();
 			var i = 0;
 			var buildingName;
 			var div = document.getElementById('buildings');
 			var div2 = document.getElementById('buildingInfo');
-			var div3 = document.getElementById('iosback');
 			var loc = null;
 			jQuery(document).ready(function($){
 				makeRequest(drawBuildings);
-				div3.style.visibility="hidden";
 				function drawBuildings(data){
 					data.contentlets.forEach(function(building){
 						contentArray[i] = '<h1>' + '<b>' + '<u>' + '<font color=' + '#e35205' + '>' + building.fullTitle + '</font>' + '</u>' + '</b>' + '</h1>' + '<p>' + building.description + '</p>';
@@ -49,13 +77,6 @@
 				window.scrollTo(0,loc);
 				loc = null;
 			}
-			/*function ios(){
-				if (device.platform == "iOS" || "iPhone"){
-					div3.style.visibility="visible";
-				}else{
-					div3.style.visibility="hidden";
-				}
-			}*/
 		</script>
 		<script src="js/vendor/jquery.js"></script>
 		<script src="js/foundation.min.js"></script>
