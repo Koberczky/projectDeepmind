@@ -19,7 +19,7 @@
 			<div class="inner-wrap">
 				<nav class="tab-bar">
 					<section class="left-small">
-						<i class="fi-arrow-left size-36 back-arrow" onclick="goBack()"></i>
+						<i class="fi-arrow-left size-36 back-arrow" onclick="buildingBack()"></i>
 					</section>
 					<section class="middle tab-bar-section">
 						<div class="logo"></div>
@@ -28,35 +28,34 @@
 						<a class="right-off-canvas-toggle menu-icon" ><span></span></a>
 					</section>
 				</nav>
-
-		<aside class="right-off-canvas-menu">
-			<ul class="off-canvas-list">
-				<li><a href="map.html">Self-Guided Tour</a></li>
-				<li><a href="map.html">Guided Tour</a></li>
-				<li><a href="buildingList.html">Building Info</a></li>
-				<li><a href="ApplyOnline.html">Apply Online</a></li>
-				<li><a href="ContactUs.html">Contact Us</a></li>
-			</ul>
-		</aside>
-		<section class="main-section">
-			<div id="buildings" align="center"></div>
-			<div id="buildingInfo" style="visability: hidden;"></div>
-		</section>
-		<a class="exit-off-canvas"></a>
+				<aside class="right-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><a href="map.html">Self-Guided Tour</a></li>
+						<li><a href="map.html">Guided Tour</a></li>
+						<li><a href="buildingList.html">Building Info</a></li>
+						<li><a href="ApplyOnline.html">Apply Online</a></li>
+						<li><a href="ContactUs.html">Contact Us</a></li>
+					</ul>
+				</aside>
+				<section class="main-section">
+					<div id="buildings" align="center"></div>
+					<div id="infowindow"></div>
+				</section>
+				<a class="exit-off-canvas"></a>
 			</div>
-	</div>
+		</div>
 		<script type="text/javascript">
 			var contentArray = new Array();
 			var i = 0;
 			var buildingName;
 			var div = document.getElementById('buildings');
-			var div2 = document.getElementById('buildingInfo');
+			var div2 = document.getElementById('infowindow');
 			var loc = null;
 			jQuery(document).ready(function($){
 				makeRequest(drawBuildings);
 				function drawBuildings(data){
 					data.contentlets.forEach(function(building){
-						contentArray[i] = '<h1>' + '<b>' + '<u>' + '<font color=' + '#e35205' + '>' + building.fullTitle + '</font>' + '</u>' + '</b>' + '</h1>' + '<p>' + building.description + '</p>';
+						contentArray[i] = '<h1>' + '<b>' + '<u>' + '<font color=' + '#e35205' + '>' + building.fullTitle + '</font>' + '</u>' + '</b>' + '</h1>' + '<p>' + '<font color="white">' + building.description + '</font>' + '</p>';
 						buildingName = "<button onclick='clickfn(" + i + ");'" + ">" + building.fullTitle + "</button>" + "<br/>";
 						div.innerHTML = div.innerHTML + buildingName;
 						i++;
@@ -66,19 +65,14 @@
 			function clickfn(num){
 				loc = window.screenY;
 				var backtolist = "<br/>" + "<button onclick='leave();'" + "> " + "Back to List" + " </button>";
-				div2.innerHTML=contentArray[num] + backtolist;
+				div2.innerHTML=contentArray[num];
 				div2.style.visibility="visible";
 				div.style.visibility="hidden";
 				window.scrollTo(0,0);
 			}
-			function leave(){
-				div2.style.visibility="hidden";
-				div.style.visibility="visible";
-				window.scrollTo(0,loc);
-				loc = null;
-			}
 		</script>
-		<script src="js/vendor/jquery.js"></script>
-		<script src="js/foundation.min.js"></script>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/foundation/js/foundation.min.js"></script>
+		<script src="js/app2.js"></script>
 	</body>  
 </html>
