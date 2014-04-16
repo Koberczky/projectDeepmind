@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" src="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+    <script type="text/javascript" src="js/makeRequest.js"></script>
+    <script type="text/javascript" src="js/jQuery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    </head>
+    <body>
+        <div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+    <nav class="tab-bar">
+      <section class="left-small">
+        <i class="fi-arrow-left size-36 back-arrow" onclick="goBack()"></i>
+      </section>
+
+      <section class="middle tab-bar-section">
+          <div class="logo">
+              </div>
+      </section>
+<section class="right-small">
+        <a class="right-off-canvas-toggle menu-icon" ><span></span></a>
+      </section>
+    </nav>
+
+    <aside class="right-off-canvas-menu">
+      <ul class="off-canvas-list">
+        <li><a href="self-guided-tour.html">Self-Guided Tour</a></li>
+        <li><a href="guided-tour.html">Guided Tour</a></li>
+        <li><a href="buildingList.html">Building Info</a></li>
+        <li><a href="ApplyOnline.html">Apply Online</a></li>
+        <li><a href="ContactUs.html">Contact Us</a></li>
+      </ul>
+    </aside>
+
+    <section class="main-section">
+
+
+        <div id="navImage"></div>
+
+
+             </section>
+  <a class="exit-off-canvas"></a>
+
+  </div>
+</div>
+            <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/foundation/js/foundation.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/guided.js"></script>
+        <script>
+        jQuery(document).ready(function($){
+            makeRequest(guidedNav);
+        var positionArray = [
+            [38.892693, -89.409409],
+            [38.892699, -89.409337],
+            [38.892701, -89.409151],
+            [38.892708, -89.408853],
+            [38.892710, -89.408672],
+            [38.892712, -89.408264],
+            [38.892714, -89.408008]
+        ];
+        if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy:true });
+        }
+        else{}
+            var j = 0;
+            var imgArray = getImages();
+        function onSuccess(position) {
+            var currentPos = [position.coords.latitude, position.coords.longitude];
+            if (j < 7)
+            {
+            if (currentPos[0] > positionArray[j][0]-.000004 && currentPos[0] < positionArray[j][0]+.000004 && currentPos[1] > positionArray[j][1]-.00015 && currentPos[1] < positionArray[j][1]+.00015){
+
+                var imageLink = "<img src='" + imgArray[j] + "'>";
+                document.getElementById('navImage').innerHTML = imageLink;
+                ++j;
+            }
+            else {
+
+                    ++j;
+                    onSuccess(position);
+                }
+            }
+            else {
+                var content = "<p>You are out of bounds</p><p>Would you like to restart? <a href='javascript:void(0)' id='resetCount'>Click here</a>";
+                document.getElementById('navImage').innerHTML = content;
+                document.getElementById("resetCount").addEventListener("click", resetCounter(position),true);
+            }
+        }
+        function onError(error) {
+             alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+        }
+            var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
+
+            function resetCounter(position){
+                j = 0;
+                onSuccess(position);
+            }
+            });
+            </script>
+    </body>
+</html>

@@ -5,7 +5,12 @@
  */
 
  $fi-path: "../fonts/" !default;
-
+@font-face {
+  font-family: "Bembo";
+  src: url("#{$fi-path}Bembo.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 @font-face {
   font-family: "foundation-icons";
   src: url("#{$fi-path}foundation-icons.ttf") format("truetype");
