@@ -35,6 +35,10 @@ text-decoration: None;
 #map-canvas{
     height:100%;
 }
+#buildings{
+overflow-y: scroll;
+max-height: 100%;
+}
 #infowindow{
 width:100%;
 height:100%;

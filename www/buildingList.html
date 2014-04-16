@@ -4,7 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="format-detection" content="telephone=no" />
 		<link rel="stylesheet" src="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/app2.css" />
 		<link rel="stylesheet" href="css/style.css" />
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
 		<!-- <link href='http://fonts.googleapis.com/css?family=Convergence|Bitter|Droid+Sans|Ubuntu+Mono' rel='stylesheet' type='text/css' /> -->
@@ -12,7 +12,6 @@
 		<script type="text/javascript" src="js/navigation.js"></script>
 		<script type="text/javascript" src="js/jQuery.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
 	<body>
 		<div class="off-canvas-wrap" data-offcanvas>
@@ -55,7 +54,8 @@
 				makeRequest(drawBuildings);
 				function drawBuildings(data){
 					data.contentlets.forEach(function(building){
-						contentArray[i] = '<h1>' + '<b>' + '<u>' + '<font color=' + '#e35205' + '>' + building.fullTitle + '</font>' + '</u>' + '</b>' + '</h1>' + '<p>' + '<font color="white">' + building.description + '</font>' + '</p>';
+						var buildingDescription = building.description.replace(/(<([^>]+)>)/ig,"");
+						contentArray[i] = '<h1>' + '<b>' + '<u>' + '<font color=' + '#e35205' + '>' + building.fullTitle + '</font>' + '</u>' + '</b>' + '</h1>' + '<p>' + '<font color="white">' + buildingDescription + '</font>' + '</p>';
 						buildingName = "<button onclick='clickfn(" + i + ");'" + ">" + building.fullTitle + "</button>" + "<br/>";
 						div.innerHTML = div.innerHTML + buildingName;
 						i++;
@@ -63,12 +63,10 @@
 				}
 			});
 			function clickfn(num){
-				loc = window.screenY;
 				var backtolist = "<br/>" + "<button onclick='leave();'" + "> " + "Back to List" + " </button>";
 				div2.innerHTML=contentArray[num];
 				div2.style.visibility="visible";
 				div.style.visibility="hidden";
-				window.scrollTo(0,0);
 			}
 		</script>
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
