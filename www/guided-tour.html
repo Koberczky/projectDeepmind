@@ -41,7 +41,9 @@
     <section class="main-section">
 
 
-        <div id="navImage"></div>
+        <div id="navImage">
+        <p>You are out of bounds, please move back onto the tour path.</p>
+        </div>
 
 
              </section>
@@ -66,17 +68,20 @@
             [38.53565, -89.24478]
         ];
         if (navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy:true });
+            var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { enableHighAccuracy:true, timeout: 30000 });
+            //navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy:true });
         }
         else{}
+            var outOfBounds = 0;
             var j = 0;
+            var eventListener = 0;
             var imgArray = getImages();
         function onSuccess(position) {
             var currentPos = [position.coords.latitude, position.coords.longitude];
             if (j < 7)
             {
-            if (currentPos[0] > positionArray[j][0]-.000004 && currentPos[0] < positionArray[j][0]+.000004 && currentPos[1] > positionArray[j][1]-.00015 && currentPos[1] < positionArray[j][1]+.00015){
-
+            if (currentPos[0] > positionArray[j][0]-.00006 && currentPos[0] < positionArray[j][0]+.00006 && currentPos[1] > positionArray[j][1]-.00005 && currentPos[1] < positionArray[j][1]+.00005){
+                outOfBounds = 0;
                 var imageLink = "<img src='" + imgArray[j] + "'>";
                 document.getElementById('navImage').innerHTML = imageLink;
                 ++j;
@@ -84,23 +89,25 @@
             else {
 
                     ++j;
-                    onSuccess(position);
+                    window.setTimeout(onSuccess(position),1000);
+                    return;
                 }
             }
-            else {
-                var content = "<p>You are out of bounds</p><p>Would you like to restart? <a href='javascript:void(0)' id='resetCount'>Click here</a>";
-                document.getElementById('navImage').innerHTML = content;
-                document.getElementById("resetCount").addEventListener("click", resetCounter(position),true);
+           else {
+               resetCounter();
+                    if (outOfBounds == 0){
+                        onSuccess(position);
+                        outOfBounds = 1;
+                    }
+               return;
             }
         }
         function onError(error) {
              alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
         }
-            var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
 
-            function resetCounter(position){
+            function resetCounter(){
                 j = 0;
-                onSuccess(position);
             }
             });
             </script>

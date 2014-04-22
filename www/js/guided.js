@@ -2,7 +2,7 @@ var imgArray = new Array();
 var i = 0;
 
 function getImages(){
-    while (i < 6){
+    while (i < 7){
         imgArray[i] = "img/navImages/img" + i + ".jpg";
             ++i;
     }
