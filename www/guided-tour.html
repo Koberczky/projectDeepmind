@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-    <head>
+
+<head>
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" src="css/bootstrap.min.css" />
@@ -10,106 +11,112 @@
     <script type="text/javascript" src="js/makeRequest.js"></script>
     <script type="text/javascript" src="js/jQuery.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-    </head>
-    <body>
-        <div class="off-canvas-wrap" data-offcanvas>
-  <div class="inner-wrap">
-    <nav class="tab-bar">
-      <section class="left-small">
-        <i class="fi-arrow-left size-36 back-arrow" onclick="goBack()"></i>
-      </section>
+</head>
 
-      <section class="middle tab-bar-section">
-          <div class="logo">
-              </div>
-      </section>
-<section class="right-small">
-        <a class="right-off-canvas-toggle menu-icon" ><span></span></a>
-      </section>
-    </nav>
+<body>
+    <div class="off-canvas-wrap" data-offcanvas>
+        <div class="inner-wrap">
+            <nav class="tab-bar">
+                <section class="left-small">
+                    <i class="fi-arrow-left size-36 back-arrow" onclick="goBack()"></i>
+                </section>
 
-    <aside class="right-off-canvas-menu">
-      <ul class="off-canvas-list">
-        <li><a href="self-guided-tour.html">Self-Guided Tour</a></li>
-        <li><a href="guided-tour.html">Guided Tour</a></li>
-        <li><a href="buildingList.html">Building Info</a></li>
-        <li><a href="ApplyOnline.html">Apply Online</a></li>
-        <li><a href="ContactUs.html">Contact Us</a></li>
-      </ul>
-    </aside>
+                <section class="middle tab-bar-section">
+                    <div class="logo">
+                    </div>
+                </section>
+                <section class="right-small">
+                    <a class="right-off-canvas-toggle menu-icon"><span></span></a>
+                </section>
+            </nav>
 
-    <section class="main-section">
+            <aside class="right-off-canvas-menu">
+                <ul class="off-canvas-list">
+                    <li><a href="self-guided-tour.html">Self-Guided Tour</a>
+                    </li>
+                    <li><a href="guided-tour.html">Guided Tour</a>
+                    </li>
+                    <li><a href="buildingList.html">Building Info</a>
+                    </li>
+                    <li><a href="ApplyOnline.html">Apply Online</a>
+                    </li>
+                    <li><a href="ContactUs.html">Contact Us</a>
+                    </li>
+                </ul>
+            </aside>
+
+            <section class="main-section">
 
 
-        <div id="navImage">
-        <p>You are out of bounds, please move back onto the tour path.</p>
+                <div id="navImage">
+                    <p>You are out of bounds, please move back onto the tour path.</p>
+                </div>
+
+
+            </section>
+            <a class="exit-off-canvas"></a>
+
         </div>
-
-
-             </section>
-  <a class="exit-off-canvas"></a>
-
-  </div>
-</div>
-            <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    </div>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/foundation/js/foundation.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/guided.js"></script>
-        <script>
-        jQuery(document).ready(function($){
+    <script>
+        jQuery(document).ready(function($) {
             makeRequest(guidedNav);
-        var positionArray = [
-            [38.53556, -89.24565],
-            [38.53564, -89.24565],
-            [38.53563, -89.24552],
-            [38.53563, -89.24529],
-            [38.53563, -89.24517],
-            [38.53563, -89.24496],
-            [38.53565, -89.24478]
-        ];
-        if (navigator.geolocation){
-            var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { enableHighAccuracy:true, timeout: 30000 });
-            //navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy:true });
-        }
-        else{}
+            var positionArray = [
+                [38.892608, -89.409455],
+                [38.892710, -89.409423],
+                [38.892717, -89.409208],
+                [38.892705, -89.409118],
+                [38.892677, -89.408666],
+                [38.892719, -89.408422],
+                [38.892691, -89.407946]
+            ];
+            if (navigator.geolocation) {
+                var watchID = navigator.geolocation.watchPosition(onSuccess, onError, {
+                    enableHighAccuracy: true,
+                    timeout: 30000
+                });
+                //navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy:true });
+            } else {}
             var outOfBounds = 0;
             var j = 0;
             var eventListener = 0;
             var imgArray = getImages();
-        function onSuccess(position) {
-            var currentPos = [position.coords.latitude, position.coords.longitude];
-            if (j < 7)
-            {
-            if (currentPos[0] > positionArray[j][0]-.00006 && currentPos[0] < positionArray[j][0]+.00006 && currentPos[1] > positionArray[j][1]-.00005 && currentPos[1] < positionArray[j][1]+.00005){
-                outOfBounds = 0;
-                var imageLink = "<img src='" + imgArray[j] + "'>";
-                document.getElementById('navImage').innerHTML = imageLink;
-                ++j;
-            }
-            else {
 
-                    ++j;
-                    window.setTimeout(onSuccess(position),1000);
+            function onSuccess(position) {
+                var currentPos = [position.coords.latitude, position.coords.longitude];
+                if (j < 7) {
+                    if (currentPos[0] > positionArray[j][0] - .00006 && currentPos[0] < positionArray[j][0] + .00006 && currentPos[1] > positionArray[j][1] - .00005 && currentPos[1] < positionArray[j][1] + .00005) {
+                        outOfBounds = 0;
+                        var imageLink = "<img src='" + imgArray[j] + "'>";
+                        document.getElementById('navImage').innerHTML = imageLink;
+                        ++j;
+                    } else {
+
+                        ++j;
+                        window.setTimeout(onSuccess(position), 1000);
+                        return;
+                    }
+                } else {
+                    resetCounter();
                     return;
                 }
             }
-           else {
-               resetCounter();
-                    if (outOfBounds == 0){
-                        onSuccess(position);
-                        outOfBounds = 1;
-                    }
-               return;
-            }
-        }
-        function onError(error) {
-             alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
-        }
 
-            function resetCounter(){
+            function onError(error) {
+                alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
+            }
+
+            function resetCounter() {
                 j = 0;
             }
-            });
-            </script>
-    </body>
+
+            function alertCoords(position) {}
+        });
+    </script>
+</body>
+
 </html>
