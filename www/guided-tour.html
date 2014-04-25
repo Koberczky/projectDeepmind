@@ -61,60 +61,11 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/foundation/js/foundation.min.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/guided.js"></script>
+    <script src="js/navigation.js"></script>
     <script>
         jQuery(document).ready(function($) {
             makeRequest(guidedNav);
-            var positionArray = [
-                [38.892608, -89.409455],
-                [38.892710, -89.409423],
-                [38.892717, -89.409208],
-                [38.892705, -89.409118],
-                [38.892677, -89.408666],
-                [38.892719, -89.408422],
-                [38.892691, -89.407946]
-            ];
-            if (navigator.geolocation) {
-                var watchID = navigator.geolocation.watchPosition(onSuccess, onError, {
-                    enableHighAccuracy: true,
-                    timeout: 30000
-                });
-                //navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy:true });
-            } else {}
-            var outOfBounds = 0;
-            var j = 0;
-            var eventListener = 0;
-            var imgArray = getImages();
 
-            function onSuccess(position) {
-                var currentPos = [position.coords.latitude, position.coords.longitude];
-                if (j < 7) {
-                    if (currentPos[0] > positionArray[j][0] - .00006 && currentPos[0] < positionArray[j][0] + .00006 && currentPos[1] > positionArray[j][1] - .00005 && currentPos[1] < positionArray[j][1] + .00005) {
-                        outOfBounds = 0;
-                        var imageLink = "<img src='" + imgArray[j] + "'>";
-                        document.getElementById('navImage').innerHTML = imageLink;
-                        ++j;
-                    } else {
-
-                        ++j;
-                        window.setTimeout(onSuccess(position), 1000);
-                        return;
-                    }
-                } else {
-                    resetCounter();
-                    return;
-                }
-            }
-
-            function onError(error) {
-                alert('code: ' + error.code + '\n' + 'message: ' + error.message + '\n');
-            }
-
-            function resetCounter() {
-                j = 0;
-            }
-
-            function alertCoords(position) {}
         });
     </script>
 </body>
