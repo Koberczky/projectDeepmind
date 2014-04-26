@@ -14,11 +14,27 @@
 			function onLoad() {
 				//checkConnection();
 				setTimeout(osCheck(), 5000);
+				if(localStorage.getItem("os") == "ios"){
+					//iOS formatting changes here
+					document.getElementById("off-canvas-wrap").style.padding-top="2rem";
+				}
 			}
 			function osCheck(){
 				initializeEnvironment();
 				localStorage.setItem("os", window.deviceInfo.brand);
-				alert(localStorage.getItem("os"));
+			}
+			function checkConnection() {
+				var networkState = navigator.connection.type;
+				var states = {};
+				states[Connection.UNKNOWN]  = 'Unknown connection';
+				states[Connection.ETHERNET] = 'Ethernet connection';
+				states[Connection.WIFI]     = 'WiFi connection';
+				states[Connection.CELL_2G]  = 'Cell 2G connection';
+				states[Connection.CELL_3G]  = 'Cell 3G connection';
+				states[Connection.CELL_4G]  = 'Cell 4G connection';
+				states[Connection.CELL]     = 'Cell generic connection';
+				states[Connection.NONE]     = 'No network connection';
+				alert('Connection type: ' + states[networkState]);
 			}
 		</script>
   </head>

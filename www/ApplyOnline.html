@@ -27,10 +27,15 @@
          ref.addEventListener('loadstop', function() { alert('stop: ' + event.url); });
          ref.addEventListener('exit', function() { alert(event.type); });
     }
-
+	function onLoad(){
+		if(localStorage.getItem("os") == "ios"){
+			//iOS formatting changes here
+			document.getElementById("off-canvas-wrap").style.padding-top="2rem";
+		}
+	}
     </script>
   </head>
-  <body>
+  <body onload="onLoad()">
 	  <div class="off-canvas-wrap" data-offcanvas>
         <div class="inner-wrap">
             <nav class="tab-bar">
