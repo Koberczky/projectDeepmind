@@ -11,17 +11,9 @@
     <script type="text/javascript" src="js/makeRequest.js"></script>
     <script type="text/javascript" src="js/jQuery.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-	<script>
-		function onLoad(){
-			if(localStorage.getItem("os") == "ios"){
-				//iOS formatting changes here
-				document.getElementById("off-canvas-wrap").style.padding-top="2rem";
-			}
-		}
-	</script>
 </head>
 
-<body onload="onLoad()">
+<body>
     <div class="off-canvas-wrap" data-offcanvas>
         <div class="inner-wrap">
             <nav class="tab-bar">
@@ -59,6 +51,7 @@
                 <div id="navImage">
                     <p>You are out of bounds, please move back onto the tour path.</p>
                 </div>
+                <div id="buildingInfo"></div>
 
 
             </section>
@@ -72,6 +65,7 @@
     <script src="js/navigation.js"></script>
     <script>
         jQuery(document).ready(function($) {
+            window.addEventListener("orientationchange", orientationChange, true);
             makeRequest(guidedNav);
 
         });
