@@ -49,9 +49,7 @@
 
 
                 <div id="navImage">
-                    <p>You are out of bounds, please move back onto the tour path.</p>
                 </div>
-                <div id="buildingInfo"></div>
 
 
             </section>
@@ -62,12 +60,27 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/foundation/js/foundation.min.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/sessvars.js"></script>
+    <script src="js/guided.js"></script>
     <script>
         jQuery(document).ready(function($) {
-            window.addEventListener("orientationchange", orientationChange, true);
-            makeRequest(guidedNav);
+            if (navigator.geolocation) {
+                var watchID = navigator.geolocation.watchPosition(onSuccess, onError, {
+                    enableHighAccuracy: true,
+                    maximumAge: 3000
+                });
+                //navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy:true });
+            } else {}
+            var outOfBounds = 0;
+            var j = 0;
+            var eventListener = 0;
+            var imgArray = getImages();
+
+            function onSuccess(position) {
+                var currentPos = [position.coords.latitude, position.coords.longitude];
+                alert(currentPos);
+            }
+
+            function onError() {}
 
         });
     </script>
