@@ -1,66 +1,98 @@
+body {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
 .gcapp {
-background-color: #2a2826;
+    background-color: #2a2826;
 }
 .main_nav {
-padding-right: .75rem;
-max-width:55px;
+    padding-right: .75rem;
+    max-width: 55px;
 }
-.logo{
-background-image: url('../img/GClogo.png');
-background-size: contain;
-background-repeat: no-repeat;
-width: 100%;
-height: 90%;
-background-position: center;
+.logo {
+    background-image: url('../img/GClogo.png');
+    -webkit-background-size: contain;
+            background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 90%;
+    background-position: center;
 }
-.iframe{
-background-color:white;
+.iframe {
+    background-color: white;
 }
-.ui-btn-top{
-top: 0;
-position: absolute;
-z-index: 99;
-margin-left: 45%;
-font-size: 2em;
-font-weight: bolder;
-color: orange;
-text-decoration: None;
+.ui-btn-top {
+    top: 0;
+    position: absolute;
+    z-index: 99;
+    margin-left: 45%;
+    font-size: 2em;
+    font-weight: bolder;
+    color: orange;
+    text-decoration: None;
 }
-.ui-btn-center{
-font-size: 2em;
-font-weight: bolder;
-color: orange!important;
-text-decoration: None;
+.ui-btn-center {
+    font-size: 2em;
+    font-weight: bolder;
+    color: orange!important;
+    text-decoration: None;
 }
-#panel{
-padding-top: .5rem;
+#map-canvas {
+    height: 100%;
 }
-#map-canvas{
-height:100%;
+#buildings {
+    overflow-y: scroll;
+    max-height: 100%;
 }
-#buildings{
-overflow-y: scroll;
-max-height: 100%;
-padding-top: 1rem;
-padding-bottom: 2.5rem;
+#infowindow {
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    position: absolute;
+    top: 45px;
+    left: 0px;
+    background-color: #2a2826;
+    z-index: 999;
+    text-align: center;
 }
-#infowindow{
-width:100%;
-height:100%;
-visibility: hidden;
-position:absolute;
-top:45px;
-left:0px;
-background-color:#2a2826;
-z-index: 999;
-text-align: center;
+.main-section {
+    height: 100%;
 }
-.main-section{
-    height:100%;
+.inner-wrap {
+    height: 100%;
 }
-.inner-wrap{
- height:100%;
+.off-canvas-wrap {
+    height: 100%;
 }
-.off-canvas-wrap{
-    height:100%;
+#buildingInfo {
+    z-index: 999;
+    padding: .3rem;
+}
+#buildingInfo p {
+    text-align: center;
+    font-size: 1.5rem;
+}
+.portrait {
+    max-height: 70%;
+}
+#buildingInfo.landscape {
+    max-width: 30%;
+    max-height: 100%;
+    float: left;
+}
+#navImage.landscape {
+    max-width: 70%;
+    height: 90%;
+    float: left;
+}
+#navImage p {
+    font-size: 1.5rem;
+    text-align: center;
+}
+.buildingDesc p {
+    font-size: 1.2rem!important;
+}
+.overthrow-enabled .overthrow {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
