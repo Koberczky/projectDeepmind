@@ -11,8 +11,16 @@
     <script type="text/javascript" src="js/navigation.js"></script>
     <script type="text/javascript" src="js/jQuery.js"></script>
     <script src="js/vendor/modernizr.js"></script>
+	<script>
+		function onLoad(){
+			if(localStorage.getItem("os") == "ios"){
+				//iOS formatting changes here
+				document.getElementById("off-canvas-wrap").style.padding-top="2rem";
+			}
+		}
+	</script>
   </head>
-  <body class="gcapp">
+  <body class="gcapp" onload="onLoad()">
     <div class="off-canvas-wrap" data-offcanvas>
 			<div class="inner-wrap">
 				<nav class="tab-bar">
