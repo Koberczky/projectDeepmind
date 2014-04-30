@@ -100,7 +100,7 @@ function onSuccess(position) {
 }
 
 function findImage(currentPos) {
-    var coordCompare = .502;
+    var coordCompare = .001;
     for (k = buildPosArray[buildingNum][0]; k <= buildPosArray[buildingNum][1]; k++) {
         var coordCalc = Math.abs(currentPos[1] - positionArray[k][1]) + Math.abs(currentPos[0] - positionArray[k][0]);
         if (coordCalc < coordCompare) {
@@ -112,7 +112,7 @@ function findImage(currentPos) {
             }
         }
     }
-    if (coordCompare == .502) {
+    if (coordCompare == .001) {
         if (buildingNum < 13) {
             document.getElementById('navImage').innerHTML = "<p>I noticed you've moved pretty far off path, if would you like to skip visiting " + buildingInfo[buildingNum].fullTitle + " then <a href ='javascript:void(0)' onclick = 'advanceBuilding()'>click here</a>.</p><p>If not, please make your way towards the building and the tour will automatically start back up.</p>";
         } else {
