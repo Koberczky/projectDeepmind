@@ -1,84 +1,94 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="format-detection" content="telephone=no" />
-		<link rel="stylesheet" src="css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/app.css" />
-		<link rel="stylesheet" href="css/style.css" />
-		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
-		<!-- <link href='http://fonts.googleapis.com/css?family=Convergence|Bitter|Droid+Sans|Ubuntu+Mono' rel='stylesheet' type='text/css' /> -->
-		<script src="phonegap.js"></script>
-		<script type="text/javascript" src="js/makeRequest.js"></script>
-		<script type="text/javascript" src="js/jQuery.js"></script>
-		<link rel="stylesheet" type="text/css" href="css/index.css" />
-		<script>
-		function onLoad(){
-			if(localStorage.getItem("os") == "ios"){
-				//iOS formatting changes here
-				document.getElementById("off-canvas-wrap").style.padding-top="2rem";
-			}
-		}
-		</script>
-    </head>
-	<body onload="onLoad()">
-		<div class="off-canvas-wrap" data-offcanvas>
-			<div class="inner-wrap">
-				<nav class="tab-bar">
-					<section class="left-small">
-						<i class="fi-arrow-left size-36 back-arrow" onclick="buildingBack()"></i>
-					</section>
-					<section class="middle tab-bar-section">
-						<div class="logo"></div>
-					</section>
-					<section class="right-small">
-						<a class="right-off-canvas-toggle menu-icon" ><span></span></a>
-					</section>
-				</nav>
-				<aside class="right-off-canvas-menu">
-					<ul class="off-canvas-list">
-						<li><a href="map.html">Self-Guided Tour</a></li>
-						<li><a href="map.html">Guided Tour</a></li>
-						<li><a href="buildingList.html">Building Info</a></li>
-						<li><a href="ApplyOnline.html">Apply Online</a></li>
-						<li><a href="ContactUs.html">Contact Us</a></li>
-					</ul>
-				</aside>
-				<section class="main-section">
-					<div id="buildings" align="center"></div>
-					<div id="infowindow"></div>
-				</section>
-				<a class="exit-off-canvas"></a>
-			</div>
-		</div>
-		<script type="text/javascript">
-			var contentArray = new Array();
-			var i = 0;
-			var buildingName;
-			var div = document.getElementById('buildings');
-			var div2 = document.getElementById('infowindow');
-			var loc = null;
-			jQuery(document).ready(function($){
-				makeRequest(drawBuildings);
-				function drawBuildings(data){
-					data.contentlets.forEach(function(building){
-						var buildingDescription = building.description.replace(/(<([^>]+)>)/ig,"");
-						contentArray[i] = '<h1>' + '<b>' + '<u>' + '<font color=' + '#e35205' + '>' + building.fullTitle + '</font>' + '</u>' + '</b>' + '</h1>' + '<p>' + '<font color="white">' + buildingDescription + '</font>' + '</p>';
-						buildingName = "<button onclick='clickfn(" + i + ");'" + ">" + building.fullTitle + "</button>" + "<br/>";
-						div.innerHTML = div.innerHTML + buildingName;
-						i++;
-					});
-				}
-			});
-			function clickfn(num){
-				var backtolist = "<br/>" + "<button onclick='leave();'" + "> " + "Back to List" + " </button>";
-				div2.innerHTML=contentArray[num];
-				div2.style.visibility="visible";
-				div.style.visibility="hidden";
-			}
-		</script>
-		<script src="bower_components/jquery/dist/jquery.min.js"></script>
-		<script src="bower_components/foundation/js/foundation.min.js"></script>
-		<script src="js/app2.js"></script>
-	</body>  
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="stylesheet" src="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+    <!-- <link href='http://fonts.googleapis.com/css?family=Convergence|Bitter|Droid+Sans|Ubuntu+Mono' rel='stylesheet' type='text/css' /> -->
+    <script src="phonegap.js"></script>
+    <script type="text/javascript" src="js/makeRequest.js"></script>
+    <script type="text/javascript" src="js/jQuery.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <script>
+        function onLoad() {
+            if (localStorage.getItem("os") == "ios") {
+                //iOS formatting changes here
+                document.getElementById("off-canvas-wrap").style.padding - top = "2rem";
+            }
+        }
+    </script>
+</head>
+
+<body onload="onLoad()">
+    <div class="off-canvas-wrap" data-offcanvas>
+        <div class="inner-wrap">
+            <nav class="tab-bar">
+                <section class="left-small">
+                    <i class="fi-arrow-left size-36 back-arrow" onclick="buildingBack()"></i>
+                </section>
+                <section class="middle tab-bar-section">
+                    <div class="logo"></div>
+                </section>
+                <section class="right-small">
+                    <a class="right-off-canvas-toggle menu-icon"><span></span></a>
+                </section>
+            </nav>
+            <aside class="right-off-canvas-menu">
+                <ul class="off-canvas-list">
+                    <li><a href="self-guided-tour.html">Self-Guided Tour</a>
+                    </li>
+                    <li><a href="guided-tour.html">Guided Tour</a>
+                    </li>
+                    <li><a href="buildingList.html">Building Info</a>
+                    </li>
+                    <li><a href="ApplyOnline.html">Apply Online</a>
+                    </li>
+                    <li><a href="ContactUs.html">Contact Us</a>
+                    </li>
+                </ul>
+            </aside>
+            <section class="main-section">
+                <div id="buildings" align="center"></div>
+                <div id="infowindow"></div>
+            </section>
+            <a class="exit-off-canvas"></a>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var contentArray = new Array();
+        var i = 0;
+        var buildingName;
+        var div = document.getElementById('buildings');
+        var div2 = document.getElementById('infowindow');
+        var loc = null;
+        jQuery(document).ready(function($) {
+            makeRequest(drawBuildings);
+
+            function drawBuildings(data) {
+                data.contentlets.forEach(function(building) {
+                    var buildingDescription = building.description.replace(/(<([^>]+)>)/ig, "");
+                    contentArray[i] = '<h1>' + '<b>' + '<u>' + '<font color=' + '#e35205' + '>' + building.fullTitle + '</font>' + '</u>' + '</b>' + '</h1>' + '<p>' + '<font color="white">' + buildingDescription + '</font>' + '</p>';
+                    buildingName = "<button onclick='clickfn(" + i + ");'" + ">" + building.fullTitle + "</button>" + "<br/>";
+                    div.innerHTML = div.innerHTML + buildingName;
+                    i++;
+                });
+            }
+        });
+
+        function clickfn(num) {
+            var backtolist = "<br/>" + "<button onclick='leave();'" + "> " + "Back to List" + " </button>";
+            div2.innerHTML = contentArray[num];
+            div2.style.visibility = "visible";
+            div.style.visibility = "hidden";
+        }
+    </script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/foundation/js/foundation.min.js"></script>
+    <script src="js/app2.js"></script>
+</body>
+
 </html>
