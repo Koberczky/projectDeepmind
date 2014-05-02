@@ -17,9 +17,9 @@ function getImages() {
 }
 var watchID
 var buildingInfo = new Array();
-
+var restart =0;
 function guidedNav(data) {
-    if (window.sessionStorage.getItem("buildingNumber") != null) {
+    if (window.sessionStorage.getItem("buildingNumber") != null && restart == 0) {
         sessvars.data = data;
         document.getElementById('navImage').innerHTML = "<p>It looks like you didn't finish your last tour, if you would like to restart from where you left off, <a href= 'javascript:void(0)' onclick = 'RestartTour()'>click here</a>.</p><p>Otherwise, <a href='javascript:void(0)' onclick = 'clearTour()'>click here to start from the beginning</a>";
         return;
@@ -88,7 +88,7 @@ function clearTour(data) {
 
 function RestartTour(data) {
     buildingNum = sessionStorage.getItem("buildingNumber");
-    sessionStorage.removeItem("buildingNumber");
+    restart = 1;
     guidedNav(sessvars.data);
     return;
 }
