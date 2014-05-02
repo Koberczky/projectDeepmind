@@ -11,18 +11,12 @@
 		<script src="js/vendor/modernizr.js"></script>
 		<script type="text/javascript" src="js/osCheck.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			function onLoad() {
-				//checkConnection();
-				setTimeout(osCheck(), 5000);
-				if(localStorage.getItem("os") == "ios"){
-					//iOS formatting changes here
-					document.getElementById("off-canvas-wrap").style.padding-top="2rem";
-				}
-			}
-			function osCheck(){
-				initializeEnvironment();
-				localStorage.setItem("os", window.deviceInfo.brand);
-			}
+			document.body.addEventListener('touchmove', function (e){
+    			if(document.elementFromPoint(e.touches[0].pageX, e.touches[0].pageY) !== document.getElementById('main-section'){
+        			e.preventDefault();
+    			}
+			}, false);
+		
 			function checkConnection() {
 				var networkState = navigator.connection.type;
 				var states = {};
@@ -38,7 +32,7 @@
 			}
 		</script>
   </head>
-  <body class="gcapp" onload="onLoad()">
+  <body class="gcapp">
     <div class="row">
       <div class="small-12 small-centered text-center columns">
         <div class="panel">

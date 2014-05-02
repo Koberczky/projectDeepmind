@@ -11,6 +11,13 @@
     <script type="text/javascript" src="js/makeRequest.js"></script>
     <script type="text/javascript" src="js/jQuery.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <script>
+    document.body.addEventListener('touchmove', function (e){
+    		if(document.elementFromPoint(e.touches[0].pageX, e.touches[0].pageY) !== document.getElementById('main-section'){
+        		e.preventDefault();
+    		}
+		}, false);
+    </script>
 </head>
 
 <body>
@@ -26,7 +33,7 @@
                     </div>
                 </section>
                 <section class="right-small">
-                    <a class="right-off-canvas-toggle menu-icon"><span></span></a>
+                    <a class="right-off-canvas-toggle menu-icon" onclick="console.log("click");"><span></span></a>
                 </section>
             </nav>
 
