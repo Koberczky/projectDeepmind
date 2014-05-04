@@ -1,20 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.gmail.koberczky" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>mapTest</name>
+    <name>Greenville College</name>
     <description>
-        Hello World sample application that responds to the deviceready event.
+        Greenville College information application for prospective students.
     </description>
-    <author email="support@phonegap.com" href="http://phonegap.com">
-        PhoneGap Team
+    <author email="deloy.cole@greenville.edu" href="http://ist.greenville.edu">
+        projectDeepmind Team
     </author>
-    <feature name="Device">
-        <param name="android-package" value="org.apache.cordova.device.Device" />
-    </feature>
-    <feature name="File">
-        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
-    </feature>
 	<feature name="NetworkStatus">
         <param name="android-package" value="org.apache.cordova.network-information.NetworkConnection" />
+    </feature>
+	<feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.geolocation.GeoBroker" />
     </feature>
     <feature name="Geolocation">
         <param name="ios-package" value="CDVLocation" />

@@ -14,10 +14,8 @@
     <script type="text/javascript" src="js/jQuery.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <script>
-        document.body.addEventListener('touchmove', function (e){
-    		if(document.elementFromPoint(e.touches[0].pageX, e.touches[0].pageY) !== document.getElementById('main-section'){
-        		e.preventDefault();
-    		}
+		document.addEventListener("backbutton", function(e){
+			buildingBack();
 		}, false);
     </script>
 </head>
@@ -54,7 +52,7 @@
             </aside>
             <section class="main-section">
                 <div id="buildings" align="center"></div>
-                <div id="infowindow"></div>
+                <div id="infowindow" class="overthrow landscape"></div>
             </section>
             <a class="exit-off-canvas"></a>
         </div>
@@ -90,6 +88,7 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/foundation/js/foundation.min.js"></script>
     <script src="js/app2.js"></script>
+	<script src="js/overthrow.min.js"></script>
 </body>
 
 </html>

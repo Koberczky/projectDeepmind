@@ -7,29 +7,12 @@
 		<link rel="stylesheet" href="css/app.css" />
 		<link rel="stylesheet" href="css/foundation.css" />
 		<link rel="stylesheet" href="css/style.css" />
-		<script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 		<script src="js/vendor/modernizr.js"></script>
-		<script type="text/javascript" src="js/osCheck.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			document.body.addEventListener('touchmove', function (e){
-    			if(document.elementFromPoint(e.touches[0].pageX, e.touches[0].pageY) !== document.getElementById('main-section')){
-        			e.preventDefault();
-    			}
-			}, false);
-		
-			function checkConnection() {
-				var networkState = navigator.connection.type;
-				var states = {};
-				states[Connection.UNKNOWN]  = 'Unknown connection';
-				states[Connection.ETHERNET] = 'Ethernet connection';
-				states[Connection.WIFI]     = 'WiFi connection';
-				states[Connection.CELL_2G]  = 'Cell 2G connection';
-				states[Connection.CELL_3G]  = 'Cell 3G connection';
-				states[Connection.CELL_4G]  = 'Cell 4G connection';
-				states[Connection.CELL]     = 'Cell generic connection';
-				states[Connection.NONE]     = 'No network connection';
-				alert('Connection type: ' + states[networkState]);
-			}
+			/*document.addEventListener("offline", function(){
+				alert("offline");
+			}, false);*/
 		</script>
   </head>
   <body class="gcapp">
