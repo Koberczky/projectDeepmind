@@ -72,9 +72,9 @@ function guidedNav(data) {
         if (navigator.geolocation) {
             watchID = navigator.geolocation.watchPosition(onSuccess, onError, {
                 enableHighAccuracy: true,
-                timeout: 30000
+                timeout: 30000,
+                maximumAge: 60000
             });
-            //navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy:true });
         } else {}
     }
 }
@@ -152,7 +152,8 @@ function leaveBuilding() {
     window.sessionStorage.setItem("buildingNumber", buildingNum);
     watchID = navigator.geolocation.watchPosition(onSuccess, onError, {
         enableHighAccuracy: true,
-        timeout: 30000
+        timeout: 30000,
+        maximumAge: 60000
     });
 }
 
