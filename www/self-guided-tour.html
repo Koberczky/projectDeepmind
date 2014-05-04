@@ -17,13 +17,18 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     <script>
-		document.addEventListener("backbutton", function(e){
-			goBack();
-		}, false);
+    	function onLoad() {
+    	    document.addEventListener("deviceready", onDeviceReady, false);
+   		 }
+		function onDeviceReady(){
+			document.addEventListener("backbutton", function(e){
+				goBack();
+			}, false);
+		}
     </script>
 </head>
 
-<body>
+<body onload="onLoad()">
     <div class="off-canvas-wrap" data-offcanvas>
         <div class="inner-wrap">
             <nav class="tab-bar">
