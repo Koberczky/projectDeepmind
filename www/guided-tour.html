@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <script>
 		document.addEventListener("backbutton", function(e){
-			goBack();
+			window.history.back();
 		}, false);
     </script>
 </head>
@@ -23,7 +23,7 @@
         <div class="inner-wrap">
             <nav class="tab-bar">
                 <section class="left-small">
-                    <i class="fi-arrow-left size-36 back-arrow" onclick="goBack()"></i>
+                    <i class="fi-arrow-left size-36 back-arrow" onclick="window.history.back()"></i>
                 </section>
 
                 <section class="middle tab-bar-section">
