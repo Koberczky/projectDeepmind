@@ -17,7 +17,8 @@ function getImages() {
 }
 var watchID
 var buildingInfo = new Array();
-var restart =0;
+var restart = 0;
+
 function guidedNav(data) {
     if (window.sessionStorage.getItem("buildingNumber") != null && restart == 0) {
         sessvars.data = data;
@@ -73,7 +74,7 @@ function guidedNav(data) {
             watchID = navigator.geolocation.watchPosition(onSuccess, onError, {
                 enableHighAccuracy: true,
                 timeout: 30000,
-                maximumAge: 60000
+                maximumAge: 3000
             });
         } else {}
     }
@@ -122,6 +123,7 @@ function findImage(currentPos) {
     if (imageNum != null) {
         var imageLink = "<img src = '" + imgArray[imageNum] + "'> ";
         document.getElementById('navImage').innerHTML = imageLink;
+        document.getElementById('buildingInfo').innerHTML = '<p>' + instructions[imageNum] + '</p>';
     }
     if (isBuilding == 1) {
         document.getElementById('buildingInfo').innerHTML = " <p> Do you want to enter " + buildingInfo[buildingNum].fullTitle + "?<br /><a href = 'javascript:void(0)' onclick = 'waitBuilding()'> Yes </a> <a href='javascript:void(0)' onclick='leaveBuilding()'>No</a> </p>";
@@ -153,7 +155,7 @@ function leaveBuilding() {
     watchID = navigator.geolocation.watchPosition(onSuccess, onError, {
         enableHighAccuracy: true,
         timeout: 30000,
-        maximumAge: 60000
+        maximumAge: 3000
     });
 }
 
@@ -277,4 +279,51 @@ var positionArray = [
     [38.893071, -89.409417],
     [38.892860, -89.409446],
     [38.892678, -89.409420]
+];
+
+var instructions = [
+    "Begin at Joy House. Take a right on College Ave.",
+    "Cross Spruce and continue along College Ave.",
+    "Continue along College Ave. towards Whitlock Music Center.",
+    "Continue along College Ave. towards Whitlock Music Center.",
+    "Continue along College Ave. towards Whitlock Music Center.",
+    "Continue along College Ave. towards Whitlock Music Center.",
+    "(Whitlock Music Center Description)",
+    "Cross College Ave. and walk along Elm St.",
+    "Take a right along the flower bed and towards Marston Hall.",
+    "Walk through the main floor hallway of Marston Hall.",
+    "Take a quick right after Marston Hall.",
+    "Walk along Marston Hall towards the steps of Ladue Auditorium.",
+    "(Ladue Auditorium Description)",
+    "Continue up the sidewalk towards the Ruby Dare Library. ",
+    "Cross the small parking lot towards the Ruby Dare Library.",
+    "Continue up the sidewalk towards the Ruby Dare Library.",
+    "(Ruby Dare Library Description).",
+    "Head up the sidewalk towards HJ Long Gymnasium.",
+    "(H.J. Long Gymnasium Description)",
+    "Continue along the sidewalk towards the center of campus.",
+    "Take a right on the mallwalk.",
+    "Walk towards Ganton Circle and veer right up the steps.",
+    "Cross the parking lot towards the Dietzman Center.",
+    "Walk along the sidewalk to the right towards the Dietzman Center.",
+    "(Dietzman Center description)",
+    "Walk across the street and take a left along the sidewalk.",
+    "Walk down the side walk and take a right after the campus map sign.",
+    "(Burritt Description)",
+    "Continue down the sidewalk towards the Dining Commons.",
+    "(Dining Commons description)",
+    "Continue down the steps towards Snyder Hall.",
+    "Walk down the mallwalk towards Snyder Hall.",
+    "Continue down the mallwalk towards Snyder Hall.",
+    "(Scott Field description)",
+    "(Snyder Hall description)",
+    "Walk down the mallwalk towards Janssen Hall.",
+    "(Janssen Hall description)",
+    "(Joy Hall description)",
+    "Veer right along the sidewalk towards the Mail room.",
+    "(Mail Room description)",
+    "(Sims Student Union description)",
+    "Continue down the sidewalk along Sim’s student union.",
+    "Cross College Ave back to Joy House.",
+    "Head towards the front door of Joy House. (Admissions Office)"
 ];
