@@ -18,8 +18,8 @@
         }
 
         function onDeviceReady() {
-            var networkState = navigator.connection;
-            if (networkState == Connection.NONE) {
+            var networkState = navigator.connection.type;
+			if (networkState == 'none') {
                 alert('App will not work without a network connection, please enable wifi or a cellphone network.');
             }
         }
