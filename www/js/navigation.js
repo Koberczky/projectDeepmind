@@ -73,7 +73,6 @@ function guidedNav(data) {
         if (navigator.geolocation) {
             watchID = navigator.geolocation.watchPosition(onSuccess, onError, {
                 enableHighAccuracy: true,
-                timeout: 30000,
                 maximumAge: 3000
             });
         } else {}
@@ -154,7 +153,6 @@ function leaveBuilding() {
     window.sessionStorage.setItem("buildingNumber", buildingNum);
     watchID = navigator.geolocation.watchPosition(onSuccess, onError, {
         enableHighAccuracy: true,
-        timeout: 30000,
         maximumAge: 3000
     });
 }
