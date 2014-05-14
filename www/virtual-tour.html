@@ -1,39 +1,20 @@
-<!doctype html>
-<html class="no-js" lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GC Tour | Apply Online</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <meta name="format-detection" content="telephone=no" />
     <link rel="stylesheet" src="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="stylesheet" href="css/style.css" />
-    <script src="js/vendor/modernizr.js"></script>
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+    <script type="text/javascript" src="js/makeRequest.js"></script>
     <script type="text/javascript" src="js/jQuery.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <script type="text/javascript" charset="utf-8">
-        // Wait for Cordova to load
-         //
-        document.addEventListener("deviceready", function() {
-            onDeviceReady();
+    <script>
+        document.addEventListener("backbutton", function(e) {
+            window.history.back();
         }, false);
-
-         // Cordova is ready
-         //
-        function onDeviceReady() {
-            var ref = window.open('https://www.gogreenvillecollege.org/freshman/splitter.htm', '_blank', 'location=yes');
-            ref.show();
-            ref.addEventListener('loadstart', function() {
-                alert('start: ' + event.url);
-            });
-            ref.addEventListener('loadstop', function() {
-                alert('stop: ' + event.url);
-            });
-            ref.addEventListener('exit', function() {
-                alert(event.type);
-            });
-        }
     </script>
 </head>
 
@@ -50,7 +31,7 @@
                     </div>
                 </section>
                 <section class="right-small">
-                    <a class="right-off-canvas-toggle menu-icon"><span></span></a>
+                    <a class="right-off-canvas-toggle menu-icon" onclick="console.log(" click ");"><span></span></a>
                 </section>
             </nav>
 
@@ -72,13 +53,17 @@
                     </li>
                 </ul>
             </aside>
-            <div id="content" class="overthrow landscape" style="height:97.9%; width:100%;">
-                <section class="main-section">
-                    <iframe src="https://www.gogreenvillecollege.org/freshman/splitter.htm" style="position:relative; padding-top:2.8125rem; padding-bottom:2rem; left:0px; bottom:0px; right:0px; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999; -webkit-overflow-scrolling: touch;">
-                        Your browser doesn't support IFrames
-                    </iframe>
-                </section>
-            </div>
+
+            <section class="main-section">
+
+
+                <div id="navImage" class="overthrow portrait">
+                    <p>Loading...</p>
+                </div>
+                <div id="buildingInfo" class="overthrow portrait"></div>
+
+
+            </section>
             <a class="exit-off-canvas"></a>
 
         </div>
@@ -86,7 +71,16 @@
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/foundation/js/foundation.min.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/virtual.js"></script>
+    <script src="js/sessvars.js"></script>
     <script src="js/overthrow.min.js"></script>
+    <script>
+        jQuery(document).ready(function($) {
+            window.addEventListener("orientationchange", orientationChange, true);
+            makeRequest(virtualNav);
+
+        });
+    </script>
 </body>
 
 </html>
